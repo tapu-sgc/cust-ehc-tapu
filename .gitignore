@@ -1,0 +1,16 @@
+build/
+CVS/
+script/.tmp/
+script/*.txt
+script/*.sh
+$*/
+*~
+*.jasper
+*.bak
+*.scc
+.DS_Store
+.project
+.classpath
+eclipse/
+/bin/
+.idea/
