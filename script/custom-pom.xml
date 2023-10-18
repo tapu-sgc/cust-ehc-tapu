@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>jxntm</groupId>
+    <artifactId>custom-dependency</artifactId>
+    <version>no-version</version>
+    <name>This POM is for customers to add additional jar files for server</name>
+    <packaging>jar</packaging>
+    <dependencies>
+  <!-- Add additional jar dependency  entries..this is just an example
+    <dependency>
+      <groupId>jxntm</groupId>
+      <artifactId>application</artifactId>
+      <version>4.2.1</version>
+    </dependency>
+	-->
+    </dependencies>
+    <repositories>
+        <!-- Add necessary repository definitions here -->
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <id>local-repo</id>
+            <name>nexus release</name>
+            <url>${read-repo-url}</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+</project>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}" />
+			<string value="Moneris Account" />
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.MonerisPaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<!-- The payment gateway Web site URL -->
+				<entry key="PaymentGatewayURL" value="${config:moneris.default.payment.gateway.url}" />
+				<entry key="authorize-success" value="1" />
+				<entry key="authorize-result-property" value="result" />
+				<!-- Landing page for payment from the admin client -->
+				<!-- Configure the server name and the port number in the line below. -->
+				<entry key="desktopLandingURL"
+					value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/modules/authorizePayment.action" />
+				<entry key="PaymentGatewayActivityID" value="response_order_id" />
+				<!-- Description of items when payment gateway is used to accept net 
+					payment only -->
+				<entry key="psStoreID" value="${config:moneris.default.ps.store.id}" />
+				<entry key="hppKey" value="${config:moneris.default.hpp.key}" />
+				<entry key="NetPaymentDescription" value="Continuing Ed Payment" />
+			</map>
+			<map>
+				<entry key="GATEWAY_POST_URL" value="${config:moneris.default.payment.gateway.url}" />
+				<entry key="ps_store_id" value="${config:moneris.default.ps.store.id}" />
+				<entry key="hpp_key" value="${config:moneris.default.hpp.key}" />
+				<entry key="charge_total" value="app:formatted_amount" />
+				<entry key="order_id" value="app:PaymentGatewayActivityID" />
+				<entry key="email" value="app:EmailAddress" />
+				<entry key="note" value="Continuing Ed Payment" />
+			</map>
+			<map>
+				<entry key="txn_num" value="TransactionNo" />
+				<entry key="charge_total" value="TransactionAmount" />
+				<entry key="bank_approval_code" value="AuthorizationCode" />
+				<entry key="result" value="TransactionStatus" />
+				<entry key="date_stamp" value="TransactionDate" />
+				<entry key="message" value="ReasonDescription" />
+				<entry key="f4l4" value="BillingAccountNo" />
+				<entry key="response_code" value="ReasonCode" />
+				<entry key="card" value="CreditCardType" />
+				<entry key="cardholder" value="BillingName" />
+			</map>
+			<map>
+				<!-- Key format: PaymentType_CreditCardType -->
+				<entry key="_V" value="20" />
+				<entry key="_M" value="21" />
+				<entry key="_AX" value="23" />
+				<entry key="_DC" value="24" />
+				<entry key="_NO" value="22" />
+			</map>
+		</method>
+	</methods>
+</singleton>

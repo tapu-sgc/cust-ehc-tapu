@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}"/>
+			<string value="Stub Account"/>
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.StubPaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<entry key="PaymentGatewayURL" value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/stub-payment/index.jsp"/>
+				<entry key="desktopLandingURL"
+					value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/modules/authorizePayment.action" />
+				<!-- Do not change these -->
+				<entry key="authorize-success" value="1" />
+				<entry key="authorize-result-property" value="x_response_code" />
+				<entry key="PaymentGatewayActivityID" value="x_invoice_num" />
+			</map>
+			<map>
+		  	    <entry key="GATEWAY_POST_URL" value="config:PaymentGatewayURL"/>
+		  		<entry key="x_amount" value="app:TransactionAmount"/>
+		        <entry key="x_invoice_num" value="app:PaymentGatewayActivityID"/>  		  		 			  	 			  	
+		        <entry key="x_first_name" value="app:FirstName"/>    
+		        <entry key="x_last_name" value="app:LastName"/>                  
+		        <entry key="x_address" value="app:StreetAddress"/>
+		        <entry key="x_city" value="app:City"/>
+		        <entry key="x_state" value="app:State"/>
+		        <entry key="x_zip" value="app:PostalCode"/>
+		        <entry key="x_country" value="app:Country"/>
+		        <entry key="x_email" value="app:EmailAddress"/>                             
+		        <entry key="x_relay_url" value="app:CallBackURL"/>        
+  			</map>
+		  	<map>
+		        <entry key="x_trans_id" value="TransactionNo"/>  	    
+		        <entry key="x_amount" value="TransactionAmount"/>                         
+		  		<entry key="x_auth_code" value="AuthorizationCode"/>
+		  		<entry key="x_response_code" value="TransactionStatus"/> 
+		  		<entry key="x_address" value="BillingStreet"/> 
+		  		<entry key="x_city" value="BillingCity"/> 
+		  		<entry key="x_state" value="BillingState"/> 
+		  		<entry key="x_country" value="BillingCountry"/> 
+		  		<entry key="x_zip" value="BillingPostalCode"/>
+		  		<entry key="x_email" value="BillingEmail"/>
+		  		<entry key="x_account_number" value="BillingAccountNo"/>  		 			  	 			  	
+		  		<entry key="x_full_name" value="BillingName"/>  		 			  	 			  	
+		        <entry key="x_method" value="PaymentType"/>                                         
+		        <entry key="x_card_type" value="CreditCardType"/>                                                        
+		        <entry key="x_response_reason_code" value="ReasonCode"/>
+		        <entry key="x_response_reason_text" value="ReasonDescription"/>
+		  	</map>
+			<map>
+  	    		<entry key="CC_Visa" value="20"/>
+  		 	    <entry key="CC_MasterCard" value="21"/>
+        		<entry key="CC_American Express" value="23"/>                                         
+                <entry key="CC_Discover" value="24"/>                                         
+  	       </map>  		  	  			
+		</method>
+	</methods>
+</singleton>

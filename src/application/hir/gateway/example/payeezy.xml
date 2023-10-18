@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+		   interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}" />
+			<string value="PayEezy Account" />
+			<object
+					class="com.jenzabar.jxntm.integration.bizapi.impl.PayEezyPaymentGatewayIFImpl"
+					interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<entry key="PaymentGatewayURL" value="${config:payeezy.default.payment.gateway.url}" />
+				<entry key="x_login" value="${config:payeezy.default.api.login}" />
+				<entry key="transaction_key" value="${config:payeezy.default.transaction.key}" />
+				<!-- This is payment description on gateway -->
+				<entry key="NetPaymentDescription" value="Continuing Ed Payment" />
+
+				<!-- Do not change these parameters -->
+				<entry key="authorize-success" value="1" />
+				<entry key="authorize-result-property" value="x_response_code" />
+				<entry key="PaymentGatewayActivityID" value="x_invoice_num" />
+			</map>
+			<map>
+				<entry key="GATEWAY_POST_URL" value="${config:payeezy.default.payment.gateway.url}" />
+				<entry key="transaction_key" value="${config:payeezy.default.transaction.key}" />
+				<entry key="x_login" value="${config:payeezy.default.api.login}" />
+				<entry key="x_amount" value="app:TransactionAmount" />
+				<entry key="x_currency_code" value="app:CurrencyCode" />
+				<entry key="x_type" value="AUTH_CAPTURE" />
+				<entry key="x_invoice_num" value="app:PaymentGatewayActivityID" />
+				<entry key="x_description" value="config:NetPaymentDescription" />
+				<entry key="x_first_name" value="app:FirstName" />
+				<entry key="x_last_name" value="app:LastName" />
+				<entry key="x_address" value="app:StreetAddress" />
+				<entry key="x_city" value="app:City" />
+				<entry key="x_state" value="app:State" />
+				<entry key="x_zip" value="app:PostalCode" />
+				<entry key="x_country" value="app:Country" />
+				<entry key="x_email" value="app:EmailAddress" />
+				<entry key="x_fp_sequence" value="app:x_fp_sequence" />
+				<entry key="x_fp_timestamp" value="app:x_fp_timestamp" />
+				<entry key="x_fp_hash" value="app:x_fp_hash" />
+				<entry key="x_show_form" value="PAYMENT_FORM" />
+				<entry key="x_receipt_link_url" value="app:CallBackURL" />
+			</map>
+			<map>
+				<entry key="x_trans_id" value="TransactionNo" />
+				<entry key="x_amount" value="TransactionAmount" />
+				<entry key="x_auth_code" value="AuthorizationCode" />
+				<entry key="x_response_code" value="TransactionStatus" />
+				<entry key="x_address" value="BillingStreet" />
+				<entry key="x_city" value="BillingCity" />
+				<entry key="x_state" value="BillingState" />
+				<entry key="x_country" value="BillingCountry" />
+				<entry key="x_zip" value="BillingPostalCode" />
+				<entry key="x_email" value="BillingEmail" />
+				<entry key="Card_Number" value="BillingAccountNo" />
+				<entry key="x_first_name" value="BillingName" />
+				<entry key="x_method" value="PaymentType" />
+				<entry key="TransactionCardType" value="CreditCardType" />
+				<entry key="x_response_reason_code" value="ReasonCode" />
+				<entry key="x_response_reason_text" value="ReasonDescription" />
+			</map>
+			<map>
+				<!-- Key format: PaymentType_CreditCardType -->
+				<entry key="_VISA" value="20" />
+				<entry key="_MASTERCARD" value="21" />
+				<entry key="_AMERICAN EXPRESS" value="23" />
+				<entry key="_DISCOVER" value="24" />
+			</map>
+		</method>
+	</methods>
+</singleton>

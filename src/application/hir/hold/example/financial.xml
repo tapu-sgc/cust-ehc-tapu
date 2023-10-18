@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.hir.hold.ActionHoldImpl"
+	interface="com.jenzabar.hir.hold.ActionHold">
+	<constructor>
+		<list>
+			<integer value="1" />
+		</list>
+		<list>
+			<string value="CurrentSections" />
+			<string value="CompletedSections" />
+			<string value="ViewCurrentSchedule" />
+			<string value="ViewOnlineSchedule" />
+			<string value="SearchCertificates" />
+			<string value="AddRegistrationRequest" />
+			<string value="CustomerAddRegistrationRequest" />
+			<string value="AddSeatReservation" />
+			<string value="CustomerAddSeatReservation" />
+			<string value="JoinWaitList" />
+			<string value="ProgramApplicationStep" />
+			<string value="ProgramApplication" />
+			<string value="StudentRegistration" />			
+		</list>
+	</constructor>
+</singleton>

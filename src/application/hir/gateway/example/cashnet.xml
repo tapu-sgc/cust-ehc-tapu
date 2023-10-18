@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}"/>
+			<string value="Cashnet Account"/>
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.CashnetPaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<entry key="PaymentGatewayURL" value="${config:cashnet.default.payment.gateway.url}"/> 
+				<entry key="ws.username" value="${config:cashnet.default.ws.username}" />
+				<entry key="ws.password" value="${config:cashnet.default.ws.password}" />
+				<entry key="virtualDirectory"
+					value="${config:cashnet.default.virtual.directory}" />
+				<entry key="desktopLandingURL"
+					value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/modules/authorizePayment.action" />
+
+				<!-- Change these only if you understand the implication -->
+				<entry key="paymentVerificationURL"
+					value="http://commerce.cashnet.com/ws/cashnetwebservice.asmx" />
+
+				<!-- Do not change these -->
+				<entry key="authorize-success" value="C" />
+				<entry key="authorize-result-property" value="txstatus" />
+				<entry key="PaymentGatewayActivityID" value="requestid" />
+				<entry key="EnableCashNetDetail" value="${config:cashnet.default.enable.details}" />
+			</map>
+			<map>
+				<entry key="GATEWAY_POST_URL"
+					value="https://commerce.cashnet.com/${config:cashnet.default.payment.gateway.folder}" /> <!-- Test Value: HIGHERREACHDEMO -->
+				<entry key="itemcode" value="FEE" />
+				<entry key="desc" value="Continuing Ed Payment" />
+				<entry key="amount" value="app:formatted_TransactionAmount" />
+				<entry key="requestid" value="app:PaymentGatewayActivityID" />
+				<entry key="lname" value="app:LastName" />
+				<entry key="fname" value="app:FirstName" />
+				<entry key="addr" value="app:StreetAddress" />
+				<entry key="city" value="app:City" />
+				<entry key="state" value="app:State" />
+				<entry key="zip" value="app:PostalCode" />
+				<entry key="email" value="app:EmailAddress" />
+				<entry key="signouturl" value="app:CallBackURL" />
+				<entry key="name_g" value="app:FullName" />
+			</map>
+			<map>
+				<entry key="totalamount" value="TransactionAmount" />
+				<entry key="txno" value="AuthorizationCode" />
+
+				<entry key="datestamp" value="TransactionDate" />
+				<entry key="carddetails" value="BillingAccountNo" />
+
+				<entry key="lname" value="BillingName" />
+				<entry key="addr" value="BillingStreet" />
+				<entry key="bcity" value="BillingCity" />
+				<entry key="state" value="BillingState" />
+				<entry key="bcountry" value="BillingCountry" />
+				<entry key="zip" value="BillingPostalCode" />
+				<entry key="email" value="BillingEmail" />
+
+				<entry key="ccerrorcode" value="ReasonCode" />
+				<entry key="ccerrormessage" value="ReasonDescription" />
+				<entry key="txstatus" value="TransactionStatus" />
+				<entry key="pmttype" value="PaymentType" />
+				<entry key="cctype" value="CreditCardType" />
+			</map>
+			<map>
+				<!-- Key format: PaymentType_CreditCardType -->
+				<entry key="CC_V" value="20" />
+				<entry key="CC_M" value="21" />
+				<entry key="CC_A" value="23" />
+				<entry key="CC_D" value="24" />
+				<entry key="ACH_" value="22" />
+			</map>
+		</method>
+	</methods>
+</singleton>

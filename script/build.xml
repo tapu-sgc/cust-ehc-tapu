@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project  default="build" name="jxntm-customer" basedir="./.." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+    <taskdef resource="net/sf/antcontrib/antlib.xml" />		
+	<if>
+		<available file="${basedir}/script/build.properties"/>
+		<then>
+			<loadproperties srcFile="${basedir}/script/build.properties"/>
+		</then>	
+		<else>
+		   <echo message="Missing ${basedir}/script/build.properties" />
+		</else>		
+	</if>		
+	<property name="script.home" value="${basedir}/script/.tmp/${hirVersion}"/> 	 
+	<mkdir dir="${script.home}" />		
+	<if>
+		<not><available file="${script.home}/tmp-pom.xml"/></not>
+		<then>			
+			<echo file="${script.home}/tmp-pom.xml">
+				&lt;project&gt;
+				  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+				  &lt;groupId&gt;jxntm&lt;/groupId&gt;
+				  &lt;artifactId&gt;no-artifact-id&lt;/artifactId&gt;
+				  &lt;version&gt;no-version&lt;/version&gt;
+				  &lt;dependencies&gt;
+					&lt;dependency&gt;
+					  &lt;groupId&gt;jxntm&lt;/groupId&gt;
+					  &lt;artifactId&gt;jxntm-release&lt;/artifactId&gt;
+					  &lt;version&gt;${hirVersion}&lt;/version&gt;
+					  &lt;type&gt;jar&lt;/type&gt;
+					&lt;/dependency&gt;			
+				  &lt;/dependencies&gt;  
+				  &lt;repositories&gt;
+					&lt;repository&gt;
+					  &lt;releases&gt;
+						&lt;enabled&gt;true&lt;/enabled&gt;
+						&lt;updatePolicy&gt;never&lt;/updatePolicy&gt;
+						&lt;checksumPolicy&gt;warn&lt;/checksumPolicy&gt;
+					  &lt;/releases&gt;
+					  &lt;snapshots&gt;
+						&lt;enabled&gt;true&lt;/enabled&gt;
+						&lt;updatePolicy&gt;always&lt;/updatePolicy&gt;
+						&lt;checksumPolicy&gt;fail&lt;/checksumPolicy&gt;
+					  &lt;/snapshots&gt;					
+					  &lt;id&gt;local-repo&lt;/id&gt;
+					  &lt;url&gt;${read-repo-url}&lt;/url&gt;
+					&lt;/repository&gt;
+				  &lt;/repositories&gt;
+				&lt;/project&gt;	
+			</echo>		
+			<!-- extract scripts -->
+			<artifact:pom id="tmp.pom"  file="${script.home}/tmp-pom.xml" />
+			<artifact:dependencies pathId="tmp.files" pomRefId="tmp.pom" versionsId="tmp.pom.files.versions" scopes="provided, compile" filesetId="tmp.pom.files"/>      
+			<unzip dest="${script.home}">	  
+				<fileset refid="tmp.pom.files"/>
+			</unzip>  
+		</then>		
+	</if>
+ 	<if>
+		<not><available file="${script.home}/build.xml"/></not>
+		<then>			
+			<fail message="Invalid HiR Version: ${hirVersion}" />
+		</then>
+		<else>
+			<import file="${script.home}/build.xml"/>	
+		</else>
+	</if>	
+</project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<singleton class="com.campus.service.SystemDefinition" interface="com.campus.service.InternalSystem">
+  <constructor>
+  	<Integer value="1"/>
+  	<string value="hir"/>
+  	<string value="HIR System"/>
+    <map class="java.util.LinkedHashMap">
+      <entry key="cloud" value="cloud.module" />
+      <entry key="initclient" value="initclient.module" />      
+      <entry key="hir" value="hir.module" />
+      <entry key="hirext" value="hirext.module" />
+      <entry key="requestmodel" value="requestmodel.module" />
+      <entry key="batchimport" value="batchimport.module" />
+      <entry key="ens" value="ens.module" />
+    </map>
+  </constructor>
+</singleton>
+

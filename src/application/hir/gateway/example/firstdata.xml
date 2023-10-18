@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}"/>
+			<string value="Firstdata Account"/>
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.FirstdataPaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<entry key="PaymentGatewayURL" value="${config:firstdata.default.payment.gateway.url}"/>
+				<entry key="SharedSecretKey" value ="${config:firstdata.default.sharedsecret}" />
+				<entry key="StoreName" value ="${config:firstdata.default.storename}" />
+				<entry key="StoreNumber" value ="${config:firstdata.default.storenumber}" />
+				<entry key="TimeZone" value ="${config:firstdata.default.timezone}" />
+				<entry key="PaymentServiceMode" value ="payonly" />
+				<entry key="CurrencyNumber" value ="840" />
+				<entry key="TxnType" value="sale" />
+								
+				<!-- Do not change these -->
+				<entry key="authorize-success" value="APPROVED" />
+				<entry key="authorize-result-property" value="status" />
+				<entry key="PaymentGatewayActivityID" value="oid" />
+			</map>
+			<map>
+		  	    <!-- debug purpose -->
+		  	    <entry key="GATEWAY_POST_URL" value="config:PaymentGatewayURL"/>
+		  		<entry key="txntype" value="config:TxnType"/>
+		        <entry key="timezone" value="config:TimeZone"/>
+		  		<entry key="txndatetime" value="app:formatted_CreateDate"/>
+		  		<entry key="hash" value="app:hash"/>
+		        <entry key="storename" value="config:StoreNumber"/> 
+		        <entry key="chargetotal" value="app:formatted_TransactionAmount"/> 
+		        <entry key="subtotal" value="app:formatted_TransactionAmount"/>
+		        <entry key="mode" value="config:PaymentServiceMode"/>           
+		        <entry key="currency" value="config:CurrencyNumber"/>
+		        <entry key="oid" value="app:PaymentGatewayActivityID"/>
+		                   
+		        <entry key="responseSuccessURL" value="app:CallBackURL"/> 
+		        <entry key="responseFailURL" value="app:CallBackURL"/> 
+		  	</map>
+		  	<map>
+		        <entry key="approval_code" value="TransactionNo"/>  	    
+		        <entry key="chargetotal" value="TransactionAmount"/>                         
+		  		<entry key="refnumber" value="AuthorizationCode"/>
+		  		<entry key="status" value="TransactionStatus"/> 
+		  		<entry key="txndate_processed" value="TransactionDate"/> 
+		  		<entry key="fail_reason" value="FailurePath"/> 
+		  		<!-- 
+		  		<entry key="oid" value="PaymentGatewayActivityID"/>
+		  		--> 
+		  		<entry key="carddetails" value="BillingAccountNo"/>
+		  		  		 			  	 			  	
+		  		<entry key="bname" value="BillingName"/>  		 			  	 			  	
+		  		<entry key="baddr1" value="BillingStreet"/>
+		  		<entry key="bcity" value="BillingCity"/> 
+		  		<entry key="bstate" value="BillingState"/> 
+		  		<entry key="bcountry" value="BillingCountry"/> 
+		  		<entry key="bzip" value="BillingPostalCode"/>
+		  		<entry key="email" value="BillingEmail"/>
+		  		<entry key="fail_reason" value="ReasonDescription"/>  		
+		        <entry key="txntype" value="PaymentType"/>                                         
+		        <entry key="paymentMethod" value="CreditCardType"/>
+		  	</map>
+		  	<map>
+		  	    <entry key="_V" value="20"/>
+		  		<entry key="_M" value="21"/>
+		        <entry key="_A" value="23"/>                                         
+		  	</map>
+		  </method>
+	</methods>
+</singleton>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}"/>
+			<string value="Paypal Account"/>
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.PaypalPaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<entry key="PaymentGatewayURL" value="${config:paypal.default.payment.gateway.url}"/>
+			    <entry key="paypal_login_email" value="${config:paypal.default.login.email}"/>
+			    <!-- PDT Token -->
+			    <entry key="identity_token" value="${config:paypal.default.identity.token}"/>
+			    <entry key="BackgroundColor" value="#C2C2C3"/>
+			    <!-- The logo of school -->
+			    <entry key="ImageURL" value="http://www.jenzabar.com/images/logo.gif"/>
+			    <entry key="NetPaymentDescription" value="Continuing Ed Payment"/>
+			    <!-- End : Change these parameters -->		
+			     
+			     <!-- Do not change these -->  		
+			     <entry key="CurrencyCode" value="USD"/>
+			     <entry key="authorize-success" value="SUCCESS"/>
+			     <entry key="authorize-result-property" value="tx_result"/> 	
+			</map>
+			<map>
+		  	    <entry key="GATEWAY_POST_URL" value="config:PaymentGatewayURL"/>
+		  		<entry key="business" value="config:paypal_login_email"/>
+		        <entry key="currency_code" value="config:CurrencyCode"/>  
+		  		<entry key="amount" value="app:formatted_amount"/>
+		        <entry key="item_name" value="config:NetPaymentDescription"/>  
+		        <entry key="first_name" value="app:FirstName"/>    
+		        <entry key="last_name" value="app:LastName"/>                  
+		        <entry key="address1" value="app:StreetAddress"/>
+		        <entry key="city" value="app:City"/>
+		        <entry key="state" value="app:State"/>
+		        <entry key="zip" value="app:PostalCode"/>
+		        <entry key="country" value="app:Country"/>
+		        <entry key="email" value="app:EmailAddress"/>                             
+		        <!-- entry key="cmd" value="_cart"/ -->   
+		        <entry key="cmd" value="_ext-enter"/>   
+		        <entry key="redirect_cmd" value="_xclick"/>   
+		        <entry key="no_shipping" value="1"/>   
+		        <entry key="no_note" value="1"/>   
+		        <!-- entry key="upload" value="1"/ -->
+		        <entry key="image_url" value="config:ImageURL"/>
+		        <entry key="cs" value="config:BackgroundColor"/>
+		        <entry key="return" value="app:CallBackURL"/> 
+		        <entry key="cancel_return" value="app:CallBackURL"/> 
+  	       </map>
+  	       <map>
+		        <entry key="receipt_id" value="TransactionNo"/>  	    
+		        <entry key="payment_gross" value="TransactionAmount"/>                         
+		  		<entry key="txn_id" value="AuthorizationCode"/>
+		  		<entry key="payment_status" value="TransactionStatus"/> 
+		  		<entry key="payment_date" value="TransactionDate"/>
+		  		<entry key="address_street" value="BillingStreet"/> 
+		  		<entry key="address_city" value="BillingCity"/> 
+		  		<entry key="address_state" value="BillingState"/> 
+		  		<entry key="address_country" value="BillingCountry"/> 
+		  		<entry key="payer_email" value="BillingEmail"/>
+		  		<entry key="payer_id" value="BillingAccountNo"/>  		 			  	 			  	
+		  		<entry key="first_name" value="BillingName"/>  		 			  	 			  	
+		  	</map>
+		  	<map></map>
+		  </method>
+	</methods>
+</singleton>

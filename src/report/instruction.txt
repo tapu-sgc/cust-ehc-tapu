@@ -1,0 +1,4 @@
+Please drop your custom reports in this folder. 
+We require you to organize your reports in subfolders even if you have only few reports.
+Your report can have an associated domain object xml file in the same name as report file. 
+You can put your report query in the domain xml.

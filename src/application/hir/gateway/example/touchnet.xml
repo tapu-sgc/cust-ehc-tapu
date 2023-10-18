@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}" />
+			<string value="Touchnet Account" />
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.TouchnetPaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<!-- Quick Admit External Payment display name -->
+				<entry key="extPaymentDisplayName" value="Authorize Payment" />
+				<entry key="ws.username" value="${config:touchnet.default.username}" />
+				<entry key="ws.password" value="${config:touchnet.default.password}" />
+				<entry key="PaymentGatewayActivityID" value="EXT_TRANS_ID" />
+				<!-- Landing page for payment from the admin client -->
+				<!-- Configure the server name and the port number in the line below. -->
+				<entry key="desktopLandingURL"
+					value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/modules/authorizePayment.action" />
+				<!-- The T-Link Web Service URL -->
+				<entry key="tlinkWebserviceURL" value="${config:touchnet.default.tlink.webservice.url}" />
+				<entry key="TICKET_NAME" value="${config:touchnet.default.ticket.name}" />
+				<!-- Upay site URL -->
+				<entry key="ticketprops">
+					<map>
+				  	    <entry key="SUCCESS_LINK" value="app:CallBackURL"/>
+				        <entry key="ERROR_LINK" value="app:CallBackURL"/>
+				        <entry key="CANCEL_LINK" value="app:CallBackURL"/>
+				        <entry key="AMT" value="app:TransactionAmount"/>                     
+				        <entry key="BILL_NAME" value="app:FullName"/>                     
+				        <entry key="BILL_STREET1" value="app:StreetAddress"/>
+				        <entry key="BILL_CITY" value="app:City"/>
+				        <entry key="BILL_STATE" value="app:State"/>
+				        <entry key="BILL_POSTAL_CODE" value="app:PostalCode"/>
+				        <entry key="BILL_COUNTRY" value="app:Country"/>
+				        <entry key="BILL_EMAIL_ADDRESS" value="app:EmailAddress"/>                             
+				        <entry key="EXT_TRANS_ID" value="app:PaymentGatewayActivityID"/>
+				  	</map>
+			  	</entry>
+			</map>			
+			<map>
+				<entry key="GATEWAY_POST_URL" value="${config:touchnet.default.upay.url}" />
+				<entry key="UPAY_SITE_ID" value="${config:touchnet.default.upay.site.id}" />
+				<entry key="TICKET" value="app:TICKET" />
+				<entry key="TICKET_NAME" value="${config:touchnet.default.ticket.name}" />
+			</map>
+			<map>
+				<entry key="pmt_method" value="PaymentType" />
+				<entry key="pmt_amt" value="TransactionAmount" />
+				<entry key="card_type" value="CreditCardType" />
+				<entry key="name_on_acct" value="BillingName" />
+				<entry key="acct_number" value="BillingAccountNo" />
+				<entry key="acct_addr" value="BillingStreet" />
+				<entry key="acct_city" value="BillingCity" />
+				<entry key="acct_state" value="BillingState" />
+				<entry key="acct_zip" value="BillingPostalCode" />
+				<entry key="ParentActivityID" value="AuthorizationCode" />
+			</map>
+			<map>
+				<!-- Key format: PaymentType_CreditCardType -->
+				<entry key="Credit_Visa" value="20" />
+				<entry key="Credit_MasterCard" value="21" />
+				<entry key="Credit_AmEx" value="23" />
+				<entry key="Credit_Discover" value="24" />
+				<entry key="ACH_" value="22" />
+			</map>
+		</method>
+	</methods>
+</singleton>

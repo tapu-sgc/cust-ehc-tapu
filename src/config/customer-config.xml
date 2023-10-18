@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://www.jenzabar.net/schema/JX/configuration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.jenzabar.net/schema/JX/configuration JXConfiguration.xsd">
+	<propertyGroup name="SchoolInfo">						
+		<property name="name" value="Jenzabar University"/>
+		<property name="address1" value="101 Huntington Avenue"/>
+		<property name="address2" value="Boston"/>
+		<property name="address3" value="MA 02199"/>
+		<property name="telephone" value="617-492-9099"/>
+		<property name="website" value="www.jenzabar.net"/>  	
+		<property name="TenantID" value="${SchoolInfo.TenantID}" />
+	</propertyGroup>
+	<propertyGroup name="paymentGateway">
+		<property name="URL" value="${paymentapi.URL}"/>
+		<property name="Secret" value="${paymentapi.Secret}"/>
+		<property name="gatewayServiceEnable" value="${paymentapi.enabled}" />
+	</propertyGroup>
+	<propertyGroup name="dataSource">	
+		<property name="defaultDataSourceInclude"  value="SQLServerDataSource" />	
+	</propertyGroup>
+
+	
+</configuration>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}"/>
+			<string value="Nelnet Account"/>
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.NelnetPaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<entry key="PaymentGatewayURL" value="${config:nelnet.default.payment.gateway.url}" />
+				<entry key="MerchantKey" value="${config:nelnet.default.merchant.key}" />
+				
+				<!-- Do not change these -->				
+				<entry key="authorize-success" value="1" />
+				<entry key="authorize-result-property" value="transactionStatus" />
+				<entry key="PaymentGatewayActivityID" value="orderNumber" />
+				<entry key="OutboundParams" value="orderType,orderNumber,orderName,amount,paymentMethod,streetOne,city,state,zip,country,daytimePhone,email,redirectUrl,redirectUrlParameters,timestamp"/>
+				<entry key="InboundParams" value="transactionType,transactionStatus,transactionId,transactionTotalAmount,transactionDate,transactionAcountType,transactionEffectiveDate,transactionDescription,transactionResultCode,transactionResultMessage,orderNumber,orderType,orderName,orderDescription,orderAmount,payerType,payerIdentifier,payerFullName,creditCardLastFour,streetOne,city,state,zip,country,email"/>                   
+				<entry key="OutboundParamValidation" value="orderName|0|32,streetOne|0|50,city|0|20,state|0|2,zip|0|10,country|0|20"/>
+			</map>
+			<map>
+		  	    <entry key="GATEWAY_POST_URL" 	value="config:PaymentGatewayURL"/>       
+		        <entry key="orderType" 			value="Higher Reach"/>
+		        <entry key="orderNumber" 		value="app:PaymentGatewayActivityID"/>
+		        <entry key="orderName" 			value="app:FullName"/> 
+				<entry key="amount" 			value="app:formattedAmount"/>
+				<entry key="redirectUrl" 		value="app:CallBackURL"/> 
+			    <entry key="redirectUrlParameters" value="config:InboundParams"/>
+		        <entry key="streetOne" 			value="app:StreetAddress"/>  
+		        <entry key="city" 				value="app:City"/>
+		        <entry key="state" 				value="app:State"/>
+		        <entry key="zip" 				value="app:PostalCode"/>
+		        <entry key="country" 			value="app:Country"/>
+		        <entry key="paymentMethod" 		value="cc"/>
+		        <entry key="timestamp" 			value="app:timestamp"/>
+		        <entry key="daytimePhone" 		value="app:Telephone"/>
+		        <entry key="email" 				value="app:EmailAddress"/>
+		        <entry key="hash" 				value="app:hash"/>
+		  	</map>
+		  	<map>
+		        <entry key="transactionId" value="TransactionNo"/>    
+		        <entry key="fmtTransactionTotalAmount" value="TransactionAmount"/>              
+		        <entry key="transactionResultCode" value="AuthorizationCode"/>
+		        <entry key="transactionResultMessage" value="TransactionStatus"/>
+		        <entry key="transactionDate" value="TransactionDate"/>
+		        <entry key="streetOne" value="BillingStreet"/>
+		        <entry key="city" value="BillingCity"/>
+		        <entry key="state" value="BillingState"/>
+		        <entry key="country" value="BillingCountry"/>
+		        <entry key="zip" value="BillingPostalCode"/>
+		        <entry key="email" value="BillingEmail"/>
+		        <entry key="transactionType" value="PaymentType"/>
+		        <entry key="transactionAcountType" value="CreditCardType"/>
+		        <entry key="transactionResultCode" value="ReasonCode"/>
+		        <entry key="transactionResultMessage" value="ReasonDescription"/>
+		        <entry key="payerIdentifier" value="BillingAccountNo"/>
+		        <entry key="payerFullName" value="BillingName"/>		
+		  	</map>
+			<map>
+		  	    <entry key="1_VISA" value="20"/>
+		  	    <entry key="1_DISCOVER" value="24"/>
+		    </map>
+		  </method>
+	</methods>
+</singleton>

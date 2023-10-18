@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}" />
+			<string value="authenet.Account" />
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.AuthnetPaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" >
+				<constructor>				
+					<map> <!-- hostedPaymentReturnOptions -->
+						<!-- in order to skip receipt page, set showReceipt to false and set use_embedded_form to true -->
+						<entry key="showReceipt" >
+							<Boolean value="false" />
+						</entry>	
+						<entry key="urlText" value="Continue" />	
+						<entry key="cancelUrlText" value="Cancel" />	
+					</map>
+					<map> <!-- hostedPaymentButtonOptions -->
+						<entry key="text" value="Pay" />	
+					</map>
+					<map> <!-- hostedPaymentStyleOptions -->
+						<entry key="bgColor" value="red" />	
+					</map>
+					<map> <!-- hostedPaymentSecurityOptions -->
+						<entry key="captcha" >
+							<Boolean value="false" />
+						</entry>	
+					</map>
+					<map> <!-- hostedPaymentBillingAddressOptions -->
+						<entry key="show" >
+							<Boolean value="true" />
+						</entry>	
+						<entry key="required" >
+							<Boolean value="false" />
+						</entry>	
+					</map>
+					<map> <!-- hostedPaymentCustomerOptions -->
+					    <!--
+						If showEmail is set to false or not included in this file, the email field will not be displayed,
+						regardless of the value set by the client in their Authorize.net account settings.
+
+						If requiredEmail is set to false and the client has checked the Required box for the Email field in
+						the Authorize.net account settings, the user may get the error "Unexpected Error.  Please try again."
+					    -->
+						<entry key="showEmail" >
+							<Boolean value="false" />
+						</entry>	
+						<entry key="requiredEmail" >
+							<Boolean value="false" />
+						</entry>	
+						<entry key="addPaymentProfile" >
+							<Boolean value="false" />
+						</entry>	
+					</map>
+					<map> <!-- hostedPaymentOrderOptions -->
+						<entry key="show" >
+							<Boolean value="true" />
+						</entry>	
+						<!-- TODO: Change the merchant name to school name -->						
+						<!-- The name entered here is displayed on the receipt page. -->
+						<entry key="merchantName" value="Jenzabar Inc" />	
+					</map>
+					<map> <!-- hostedPaymentPaymentOptions -->
+						<entry key="cardCodeRequired">
+							<Boolean value="false" />
+						</entry>
+						<entry key="showCreditCard">
+							<Boolean value="true" />
+						</entry>
+						<entry key="showBankAccount">
+							<Boolean value="true" />
+						</entry>
+					</map>
+				</constructor>				
+			</object>	
+			<map>
+				<!-- TODO: These 3 parameters need to be set -->
+				<entry key="PaymentGatewayURL" value="${config:authenet.default.payment.gateway.url}" />
+				<entry key="api_login_id" value="${config:authenet.default.api.login.id}" />
+				<entry key="transaction_key" value="${config:authenet.default.transaction.key}" />
+				<entry key="environment" value="${config:authenet.default.environment}" />
+				
+				<entry key="desktopLandingURL"
+					value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/modules/authorizePayment.action" />
+
+				<entry key="hostedPaymentIFrameCommunicatorUrl"
+					value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/modules/ANetIFrameCommunicator.action" />
+
+				<entry key="callBackURL"
+					value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/modules/resumeCheckout.action" />
+
+				<!-- use_embedded_form set to true will embed authorize.net payment form in an iframe -->
+				<entry key="use_embedded_form" value="true" />
+
+				<!-- Do not change these parameters -->
+				<entry key="authorize-success" value="1" />
+				<entry key="authorize-result-property" value="ResponseCode" />
+				<entry key="PaymentGatewayActivityID" value="PaymentGatewayActivityID" />
+				<!-- This is payment invoice number on gateway -->
+				<entry key="invoice_no" value="app:PaymentGatewayActivityID" />
+				<!-- This is payment description on gateway -->
+				<entry key="NetPaymentDescription" value="Continuing Ed Payment" />
+
+	
+			</map>
+			<map>
+				<entry key="GATEWAY_POST_URL" value="${config:authenet.default.payment.gateway.url}" />
+				<entry key="token" value="app:token" />
+			</map>			
+			<map>
+				<entry key="transId" value="TransactionNo" />
+				<entry key="totalAmount" value="TransactionAmount" />
+				<entry key="authorization" value="AuthorizationCode" />
+				<entry key="responseCode" value="TransactionStatus" />
+				<entry key="address" value="BillingStreet" />
+				<entry key="city" value="BillingCity" />
+				<entry key="state" value="BillingState" />
+				<entry key="country" value="BillingCountry" />
+				<entry key="zip" value="BillingPostalCode" />
+				<entry key="accountNumber" value="BillingAccountNo" />
+				<entry key="billingName" value="BillingName" />
+				<entry key="accountType" value="CreditCardType" />
+				<entry key="paymentType" value="PaymentType" />
+			</map>
+			<map>
+				<!-- Key format: PaymentType_CreditCardType -->
+				<entry key="CC_Visa" value="20" />
+				<entry key="CC_MasterCard" value="21" />
+				<entry key="CC_AmericanExpress" value="23" />
+				<entry key="CC_Discover" value="24" />
+				<entry key="eCheck_eCheck" value="22" />
+			</map>
+		</method>
+	</methods>
+</singleton>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<singleton class="com.jenzabar.jxntm.gateway.PaymentGatewayAccountImpl"
+	interface="com.jenzabar.jxntm.gateway.PaymentGatewayAccount">
+	<methods>
+		<method name="init">
+			<string value="${name}" />
+			<string value="Cybersource Account" />
+			<object
+				class="com.jenzabar.jxntm.integration.bizapi.impl.CybersourcePaymentGatewayIFImpl"
+				interface="com.jenzabar.jxntm.integration.bizapi.PaymentGatewayIF" />
+			<map>
+				<entry key="PaymentGatewayURL" value="${config:cybersource.default.payment.gateway.url}" />
+				<entry key="access_key" value="${config:cybersource.default.access.key}" />
+				<entry key="profile_id" value="${config:cybersource.default.profile.id}" />
+				<entry key="shared_secret" value="${config:cybersource.default.shared.secret}" />
+				<entry key="desktopLandingURL"
+					value="https://${config:gatewayhost.name}:${config:gatewayhost.https.port}/modules/authorizePayment.action" />
+				<!-- End : Change these parameters -->
+				<!-- Do not change these parameters -->
+				<entry key="transaction_type" value="sale" />
+				<entry key="authorize-success" value="ACCEPT" />
+				<entry key="authorize-result-property" value="decision" />
+				<entry key="authorize-amount-property" value="amount" />
+				<entry key="authorize-message-property" value="message" />
+				<entry key="PaymentGatewayActivityID" value="req_reference_number" />
+				<entry key="locale" value="en-us" />
+				<entry key="signed_field_names"
+					value="access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,amount,currency,bill_to_forename,bill_to_surname,bill_to_address_line1,bill_to_address_city,bill_to_address_state,bill_to_address_postal_code,bill_to_address_country,bill_to_email,bill_to_phone" />
+				<entry key="unsigned_field_names" value="" />
+				<entry key="currency" value="usd" />
+				<entry key="OutboundParamValidation"
+					value="bill_to_forename|AlphaNumericPunctuationWithSpace|0|60,bill_to_surname|AlphaNumericPunctuationWithSpace|0|60,bill_to_address_line1|AlphaNumericPunctuationWithSpace|0|60,bill_to_address_city|AlphaNumericPunctuationWithSpace|0|50,bill_to_address_state|AlphaNumericPunctuationWithSpace|0|2,bill_to_address_postal_code|AlphaNumericPunctuationWithSpace|0|10,bill_to_address_country|Alpha|0|2,bill_to_email|Email|0|255,bill_to_phone|Phone|6|15" />
+				<entry key="use_embedded_form" value="true" />
+			</map>
+			<map>
+				<entry key="GATEWAY_POST_URL" value="${config:cybersource.default.payment.gateway.url}" />
+				<entry key="access_key" value="${config:cybersource.default.access.key}" />
+				<entry key="profile_id" value="${config:cybersource.default.profile.id}" />
+				<entry key="transaction_uuid" value="app:transaction_uuid" />
+				<entry key="signed_field_names" value="access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,amount,currency,bill_to_forename,bill_to_surname,bill_to_address_line1,bill_to_address_city,bill_to_address_state,bill_to_address_postal_code,bill_to_address_country,bill_to_email,bill_to_phone" />
+				<entry key="unsigned_field_names" value="" />
+				<entry key="locale" value="en-us" />
+				<entry key="transaction_type" value="sale" />
+				<entry key="reference_number" value="app:PaymentGatewayActivityID" />
+				<entry key="amount" value="app:TransactionAmount" />
+				<entry key="currency" value="config:currency" />
+				<entry key="bill_to_forename" value="app:FirstName" />
+				<entry key="bill_to_surname" value="app:LastName" />
+				<entry key="bill_to_address_line1" value="app:StreetAddress" />
+				<entry key="bill_to_address_city" value="app:City" />
+				<entry key="bill_to_address_state" value="app:State" />
+				<entry key="bill_to_address_postal_code" value="app:PostalCode" />
+				<entry key="bill_to_address_country" value="app:Country" />
+				<entry key="bill_to_email" value="app:EmailAddress" />
+				<entry key="bill_to_phone" value="app:Telephone" />
+				<!-- calculated values -->
+				<entry key="signed_date_time" value="app:signed_date_time" />
+				<entry key="signature" value="app:signature" />
+			</map>
+			<map>
+				<entry key="auth_trans_ref_no" value="TransactionNo" />
+				<entry key="auth_amount" value="TransactionAmount" />
+				<entry key="auth_code" value="AuthorizationCode" />
+				<entry key="decision" value="TransactionStatus" />
+				<entry key="auth_time" value="TransactionDate" />
+				<entry key="req_bill_to_address_line1" value="BillingStreet" />
+				<entry key="req_bill_to_address_city" value="BillingCity" />
+				<entry key="req_bill_to_address_state" value="BillingState" />
+				<entry key="req_bill_to_address_country" value="BillingCountry" />
+				<entry key="req_bill_to_address_postal_code" value="BillingPostalCode" />
+				<entry key="req_bill_to_email" value="BillingEmail" />
+				<entry key="req_card_number" value="BillingAccountNo" />
+				<entry key="req_bill_to_forename" value="BillingName" />
+				<entry key="req_payment_method" value="PaymentType" />
+				<entry key="req_card_type" value="CreditCardType" />
+				<entry key="reasonCode" value="ReasonCode" />
+				<entry key="message" value="ReasonDescription" />
+			</map>
+			<map>
+				<!-- Key format: PaymentType_CreditCardType -->
+				<entry key="card_001" value="20" />
+				<entry key="card_002" value="21" />
+				<entry key="check_" value="22" />
+				<entry key="card_003" value="23" />
+				<entry key="card_004" value="24" />
+			</map>
+		</method>
+	</methods>
+</singleton>
